@@ -1,0 +1,51 @@
+<%- include ("./partials/_header.ejs") %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-body">
+          <%- include ("./partials/_task-form") %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">N*</th>
+            <th scope="col">Title</th>
+            <th scope="col">description</th>
+            <th scope="col">Operations</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <% for(let i = 0; i < tasks.length; i++) { %>
+
+        <tr>
+          <td><%= i + 1 %></td>
+          <td><%= tasks[i].title %></td>
+          <td><%= tasks[i].description%></td>
+          <td>
+            <div class="btn-group">
+              <a
+                href="/done/<%= tasks[i]._id %> "
+                class="btn <%= tasks[i].status ? 'btn-success': 'btn-dark' %>"
+                >Done</a
+              >
+              <a href="/edit/<%= tasks[i]._id %> " class="btn btn-primary"
+                >Edit</a
+              >
+              <a href="/delete/<%= tasks[i]._id %> " class="btn btn-danger"
+                >Delete</a
+              >
+            </div>
+          </td>
+        </tr>
+
+        <%}%>
+      </table>
+    </div>
+  </div>
+</div>
