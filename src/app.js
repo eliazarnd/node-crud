@@ -1,16 +1,16 @@
+require("dotenv").config();
+require("./database");
 const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
-const mongoose = require("mongoose");
 const app = express();
-
-mongoose
-  .connect("mongodb://localhost/crud-mongo")
-  .then((db) => console.log("Db connected"))
-  .catch((err) => console.log(err));
 
 // getting routes
 const indexRoutes = require("./routes/index");
+
+// getting routes for API
+const apiRoutes = require("./routes/apiRoutes");
+
 // settings
 app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "/views"));
@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // routes
 app.use("/", indexRoutes);
+app.use("/api/v1", apiRoutes);
 
 // starting the server
 app.listen(app.get("port"), () => {

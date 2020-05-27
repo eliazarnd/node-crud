@@ -11,6 +11,16 @@ router.get("/", async (req, res) => {
   });
 });
 
+router.get("/api/v1/tasks", async (req, res) => {
+  const tasks = await Task.find();
+
+  res.json({
+    tasks,
+    statusCode: res.statusCode,
+    message: "Success Request",
+  });
+});
+
 router.post("/add", async (req, res) => {
   const task = new Task(req.body);
 
